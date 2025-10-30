@@ -233,3 +233,22 @@ body.ads-enabled .ad-container {
 .ad-container.ad-top { @apply w-full max-w-7xl mx-auto p-4; }
 .ad-container.ad-side { @apply w-40 h-96 p-4 hidden lg:block; }
 .ad-container.ad-side .ad-placeholder { @apply h-full; }
+/* ---
+Achievement Badges
+--- */
+.badge-container {
+    @apply flex flex-col items-center justify-center text-center w-24;
+}
+
+.badge-icon {
+    @apply w-16 h-16 rounded-full flex items-center justify-center mb-1;
+    @apply ring-4 ring-gray-100 dark:ring-gray-900;
+}
+
+.badge-icon i {
+    @apply w-8 h-8;
+}
+
+.badge-name {
+    @apply text-xs font-medium text-gray-700 dark:text-gray-300 w-full truncate;
+}
