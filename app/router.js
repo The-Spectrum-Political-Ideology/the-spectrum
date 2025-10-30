@@ -12,13 +12,13 @@ import { ProfilePage, initProfilePage } from '../views/ProfilePage.js';
 import { SettingsPage } from '../views/SettingsPage.js';
 import { CommunityPage, initCommunityPage } from '../views/CommunityPage.js';
 import { HowItWorksPage } from '../views/HowItWorksPage.js';
-import { DailyQuizPage, initDailyQuizPage } from '../views/DailyQuizPage.js'; // NEW
+import { DailyQuizPage, initDailyQuizPage } from '../views/DailyQuizPage.js';
 import { NotFoundPage, ErrorPage } from '../views/ErrorPages.js';
 
 const routes = {
     '/': HomePage,
     '/quiz': QuizPage,
-    '/daily': DailyQuizPage, // NEW
+    '/daily': DailyQuizPage,
     '/results': ResultsPage,
     '/profile': ProfilePage,
     '/settings': SettingsPage,
@@ -78,7 +78,7 @@ async function handleRouteChange() {
             initProfilePage(param);
         }
         if (routeKey === '/daily') {
-            initDailyQuizPage(); // NEW
+            initDailyQuizPage();
         }
 
     } catch (error) {
@@ -90,11 +90,12 @@ async function handleRouteChange() {
     if(window.feather) feather.replace();
 }
 
-// Page-specific listener that needs to be attached *after* render
 function setupSettingsListeners() {
     const adsToggle = document.getElementById('ads-toggle');
     if (adsToggle) {
         adsToggle.addEventListener('change', (e) => {
+            if (e.target.disabled) return;
+            
             const enabled = e.target.checked;
             document.body.classList.toggle('ads-enabled', enabled);
             localStorage.setItem('adsEnabled', enabled);
