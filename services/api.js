@@ -83,9 +83,16 @@ export async function saveQuizResult(userId, scores, ideology) {
  * Fetches profile data for a user
  */
 export async function getProfile(userId) {
-    // ... (unchanged)
+    const { data: profileData, error: profileError } = await supabase
+        .from('profiles')
+        // ADD 'current_streak' TO THIS LIST
+        .select('id, username, created_at, latest_ideology, total_xp, current_streak')
+        .eq('id', userId)
+        .single();
+    
+    if (profileError) throw profileError;
+    return profileData;
 }
-
 /**
  * Fetches all quiz results for a user (for the journey chart)
  */

@@ -252,3 +252,9 @@ Achievement Badges
 .badge-name {
     @apply text-xs font-medium text-gray-700 dark:text-gray-300 w-full truncate;
 }
+/* ---
+Profile Page Cards (M4.1)
+--- */
+.profile-card {
+    @apply bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6;
+}
