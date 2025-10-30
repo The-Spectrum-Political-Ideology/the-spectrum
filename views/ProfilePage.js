@@ -53,7 +53,7 @@ export async function ProfilePage(userIdParam) {
                 labels: results.map(r => new Date(r.created_at).toLocaleDateString()),
                 datasets: [
                     { label: 'Economic', data: results.map(r => r.scores.econ), borderColor: '#818cf8', tension: 0.1, fill: false },
-                    { label: 'Diplomatic', data: results.map(r => r.scores.dipl), borderColor: '#4ade80', tension: 0.1, fill: false },
+                    { label: 'Diplomatic', data: results.map(r => r.scores.dipl), borderColor: '#4ade80', tension: 0.1, fill:.false },
                     { label: 'Civil', data: results.map(r => r.scores.govt), borderColor: '#f87171', tension: 0.1, fill: false },
                     { label: 'Societal', data: results.map(r => r.scores.scty), borderColor: '#facc15', tension: 0.1, fill: false }
                 ]
@@ -97,7 +97,7 @@ export async function ProfilePage(userIdParam) {
                         <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 overflow-hidden">
                             <div class="bg-green-500 h-4" style="width: ${xpBarPercentage}%"></div>
                         </div>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">${xpInCurrentLevel} / ${XP_PER_LEVEL} XP to next level</G/p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${xpInCurrentLevel} / ${XP_PER_LEVEL} XP to next level</p>
                     </div>
                     
                     <div class="mt-10">

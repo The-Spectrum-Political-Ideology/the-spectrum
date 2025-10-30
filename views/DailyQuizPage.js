@@ -16,6 +16,7 @@ export function DailyQuizPage() {
 }
 
 // 2. Init function (called by the router)
+// v--- THIS IS THE FUNCTION YOUR FILE IS MISSING ---v
 export async function initDailyQuizPage() {
     const container = document.getElementById('daily-quiz-container');
     container.innerHTML = `<div class="page-loader"><div class="spinner-lg"></div></div>`;
