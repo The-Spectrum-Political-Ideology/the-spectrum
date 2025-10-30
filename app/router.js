@@ -4,19 +4,21 @@ import { showPageLoader, updateActiveNavLinks } from '../ui/utils.js';
 import { showToast } from '../ui/toast.js';
 import * as Quiz from '../services/quiz.js';
 
-// Page Views
+// Page Views & Logic
 import { HomePage } from '../views/HomePage.js';
 import { QuizPage } from '../views/QuizPage.js';
 import { ResultsPage } from '../views/ResultsPage.js';
-import { ProfilePage } from '../views/ProfilePage.js';
+import { ProfilePage, initProfilePage } from '../views/ProfilePage.js';
 import { SettingsPage } from '../views/SettingsPage.js';
-import { CommunityPage } from '../views/CommunityPage.js';
+import { CommunityPage, initCommunityPage } from '../views/CommunityPage.js';
 import { HowItWorksPage } from '../views/HowItWorksPage.js';
+import { DailyQuizPage, initDailyQuizPage } from '../views/DailyQuizPage.js'; // NEW
 import { NotFoundPage, ErrorPage } from '../views/ErrorPages.js';
 
 const routes = {
     '/': HomePage,
     '/quiz': QuizPage,
+    '/daily': DailyQuizPage, // NEW
     '/results': ResultsPage,
     '/profile': ProfilePage,
     '/settings': SettingsPage,
@@ -35,10 +37,16 @@ async function handleRouteChange() {
     if (!main) return;
 
     // --- Route Guards ---
-    const requiresAuth = ['/profile', '/settings', '/quiz'];
+    const requiresAuth = ['/settings', '/daily']; // Settings & Daily Quiz are protected
     if (requiresAuth.includes(routeKey) && !App.state.user) {
         window.location.hash = '';
         showToast('You must be logged in to view that page.', 'info');
+        return;
+    }
+    
+    if (routeKey === '/profile' && !param && !App.state.user) {
+        window.location.hash = '';
+        showToast('You must be logged in to view your profile.', 'info');
         return;
     }
 
@@ -51,10 +59,9 @@ async function handleRouteChange() {
     // --- Render Page ---
     showPageLoader(main);
     try {
-        // Pass the param (e.g., user_id) to the view
-        main.innerHTML = await view(param); 
+        main.innerHTML = await view(param);
 
-        // Run page-specific logic
+        // --- Run Page-Specific Logic ---
         if (routeKey === '/quiz') {
             Quiz.start();
         }
@@ -64,13 +71,23 @@ async function handleRouteChange() {
         if (routeKey === '/settings') {
             setupSettingsListeners();
         }
+        if (routeKey === '/community') {
+            initCommunityPage();
+        }
+        if (routeKey === '/profile') {
+            initProfilePage(param);
+        }
+        if (routeKey === '/daily') {
+            initDailyQuizPage(); // NEW
+        }
+
     } catch (error) {
         console.error("Error rendering page:", error);
         main.innerHTML = ErrorPage(error.message);
     }
 
     updateActiveNavLinks();
-    if(window.feather) feather.replace(); // Re-run Feather Icons
+    if(window.feather) feather.replace();
 }
 
 // Page-specific listener that needs to be attached *after* render
