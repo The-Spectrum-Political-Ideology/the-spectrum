@@ -21,6 +21,7 @@ export function CommunityPage() {
 }
 
 // 2. Init function (called by the router)
+// THIS IS THE FUNCTION YOUR ROUTER IS MISSING
 export async function initCommunityPage() {
     const searchInput = document.getElementById('user-search-input');
     const userListContainer = document.getElementById('user-list-container');
