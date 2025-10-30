@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Spectrum</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Zilla+Slab:wght@700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    </head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+
+    <div id="app-wrapper">
+        
+        <nav id="main-nav" class="sticky top-0 z-40 w-full h-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <a href="#" class="flex-shrink-0 flex items-center gap-2">
+                        <i data-feather="bar-chart-2" class="text-indigo-400"></i>
+                        <span class="font-display text-2xl font-bold">The Spectrum</span>
+                    </a>
+
+                    <div class="hidden md:flex md:items-center md:space-x-4">
+                        <a href="#" class="nav-link" data-nav-link>Home</a>
+                        <a href="#quiz" class="nav-link" data-nav-link>Quiz</a>
+                        <a href="#community" class="nav-link" data-nav-link>Community</a>
+                        <a href="#how-it-works" class="nav-link" data-nav-link>How It Works</a>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button id="theme-toggle" class="nav-icon-btn">
+                            <i data-feather="sun" class="block dark:hidden"></i>
+                            <i data-feather="moon" class="hidden dark:block"></i>
+                        </button>
+
+                        <div id="auth-container" class="flex items-center gap-2">
+                            <div id="logged-out-links">
+                                <button class="btn btn-sm btn-outline" data-modal-trigger="login">Log In</button>
+                                <button class="btn btn-sm btn-primary hidden sm:inline-flex" data-modal-trigger="signup">Sign Up</button>
+                            </div>
+                            <div id="logged-in-links" class="hidden relative">
+                                <button id="user-menu-button" class="flex items-center gap-2 rounded-full p-1 pe-3 hover:bg-gray-500/10">
+                                    <span class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center font-bold text-white" id="user-avatar-initial">?</span>
+                                    <span class="font-medium" id="user-menu-name">User</span>
+                                    <i data-feather="chevron-down" class="w-4 h-4"></i>
+                                </button>
+                                <div id="user-menu-dropdown" class="dropdown-menu hidden">
+                                    <a href="#profile" class="dropdown-item" data-nav-link>Profile</a>
+                                    <a href="#settings" class="dropdown-item" data-nav-link>Settings</a>
+                                    <button id="logout-button" class="dropdown-item dropdown-item-danger">Log Out</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="mobile-menu-btn" class="nav-icon-btn md:hidden">
+                            <i data-feather="menu"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 w-full bg-white dark:bg-gray-800 shadow-lg py-2">
+                <a href="#" class="mobile-nav-link" data-nav-link>Home</a>
+                <a href="#quiz" class="mobile-nav-link" data-nav-link>Quiz</a>
+                <a href="#community" class="mobile-nav-link" data-nav-link>Community</a>
+                <a href="#how-it-works" class="mobile-nav-link" data-nav-link>How It Works</a>
+            </div>
+        </nav>
+
+        <div id="ad-container-top" class="ad-container ad-top">
+            <div class="ad-placeholder text-center">Top Ad Banner</div>
+        </div>
+        <div class="flex max-w-7xl mx-auto">
+            <div id="ad-container-side" class="ad-container ad-side flex-shrink-0">
+                 <div class="ad-placeholder text-center">Side Ad</div>
+            </div>
+
+            <main id="app" class="flex-grow min-h-screen p-4 sm:p-6 lg:p-8">
+                </main>
+        </div>
+
+        <footer class="w-full bg-gray-200 dark:bg-gray-800 p-8 text-center text-gray-600 dark:text-gray-400 mt-12">
+            <p>&copy; 2025 The Spectrum. All rights reserved.</p>
+            <div class="flex gap-4 justify-center mt-2">
+                <a href="#" class="hover:text-indigo-400">Privacy Policy</a>
+                <a href="#" class="hover:text-indigo-400">Terms of Service</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="modal-backdrop" class="fixed inset-0 bg-black/70 z-50 hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="modal-container" class="fixed inset-0 z-[60] flex items-center justify-center p-4 hidden opacity-0 translate-y-4 scale-95 transition-all duration-300">
+        </div>
+
+    <div id="toast-container" class="fixed bottom-4 right-4 z-[70] w-full max-w-xs space-y-3">
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
